@@ -3,10 +3,10 @@
 ## Executive Summary
 
 - Claude Code is a terminal-based AI coding assistant distributed as an npm package, with only documentation and GitHub workflows open-sourced → limited ability to customize or extend the core functionality.
-- The repository serves primarily as a distribution wrapper rather than containing implementation code → actual functionality is encapsulated in the npm package as a minified 4.6MB JavaScript file.
+- The repository serves primarily as a distribution wrapper rather than containing implementation code → actual functionality is encapsulated in the npm package.
 - The tool provides extensive capabilities including code editing, git workflows, and answering questions about codebases → potential to significantly improve developer productivity.
 - Claude Code is explicitly labeled as a "Research Preview" with beta status → potential stability issues and evolving functionality that may impact production use.
-- The software is subject to Anthropic's Commercial Terms of Service rather than an open-source license → usage restrictions and potential vendor lock-in for businesses, though reverse engineering efforts have revealed portions of the implementation (as discussed in a Reddit post: https://www.reddit.com/r/LocalLLaMA/comments/1j3emu0/open_source_claude_code_actual_repo_converted/).
+- The software is subject to Anthropic's Commercial Terms of Service rather than an open-source license → usage restrictions and potential vendor lock-in for businesses.
 
 ## Primary Use Case
 
@@ -50,27 +50,25 @@ Latency is unknown from code alone, as the implementation details are not availa
 ## Architecture Breakdown
 
 ### Classic Backend
-- Lines of Code: Approximately 190,000 lines in the beautified minified JavaScript file
-- Key dependencies: Node.js (18+), React, Ink (React-based CLI framework), AWS SDK, Sentry, web-streams-polyfill, node-fetch, undici, ws, rxjs, uuid, highlight.js, dotenv, jsdom, htmlparser2, sharp, commander.js, yoga, statsig
+- Lines of Code: Unknown from code alone
+- Key dependencies: Node.js (18+) as stated in README.md
 - The repository contains GitHub Actions for issue triage and running Claude Code in workflows
 
 ### LLM Components
-- Lines of Code: Embedded within the 4.6MB minified JavaScript file
-- The implementation is not directly visible in the repository but has been partially reverse-engineered
-- Based on the README.md and reverse engineering, it uses Claude (Anthropic's LLM) for understanding and generating code
+- Lines of Code: Unknown from code alone
+- The implementation is not visible in the repository
+- Based on the README.md, it uses Claude (Anthropic's LLM) for understanding and generating code
 - Includes API integration with Anthropic's services through OAuth authentication
 
 ### Promptware
-- Lines of Code: Embedded within the minified JavaScript file
+- Lines of Code: Unknown from code alone
 - The GitHub Actions contain examples of prompts for issue triage
 - Supports custom slash commands via Markdown files in `.claude/commands/` directories
-- Reverse engineering has revealed system prompts used by the tool
 
 ### Unique Components
-- Terminal-based interface for AI coding assistance built on Ink (React for CLI)
+- Terminal-based interface for AI coding assistance
 - Support for MCP (Model Control Protocol) servers for extending functionality
 - Custom tool permissions system via `/approved-tools` command
-- Sophisticated code parsing and manipulation capabilities embedded in the minified code
 
 ## Code Snippets Review
 
@@ -98,17 +96,14 @@ The lack of version pinning in the global installation could lead to unexpected 
 ### High Impact
 - **License Risk**: Proprietary license with commercial terms rather than open-source → potential vendor lock-in and usage restrictions.
 - **Data Privacy**: The tool processes user code and commands, with data collection mentioned in README.md → potential intellectual property exposure.
-- **Obfuscated Implementation**: The core functionality is distributed as a minified 4.6MB JavaScript file → difficult to audit for security or privacy concerns without reverse engineering.
 
 ### Medium Impact
 - **Beta Status**: Explicitly labeled as "Research Preview" → potential stability issues and evolving functionality.
 - **External Dependency**: Requires authentication with Anthropic Console account → service disruption if authentication services are unavailable.
-- **Reverse Engineering Efforts**: Community reverse engineering has revealed implementation details → potential legal risks for derivative works and possible future countermeasures by Anthropic.
 
 ### Low Impact
 - **Node.js Requirement**: Requires Node.js 18+ → may require environment updates for teams using older Node versions.
 - **Terminal-Only Interface**: No GUI options mentioned → potential learning curve for developers not comfortable with terminal tools.
-- **Large Dependency Tree**: Analysis of the minified code reveals numerous external dependencies → potential security vulnerabilities from the dependency chain.
 
 ## Competitive Context
 
@@ -120,5 +115,4 @@ Compared to GitHub Copilot CLI, Claude Code appears to offer similar terminal-ba
 2. **Review Terms of Service**: Carefully review Anthropic's Commercial Terms of Service to understand data usage, privacy implications, and any restrictions that might affect your organization.
 3. **Create Usage Guidelines**: Develop internal guidelines for developers on what types of code and projects are appropriate to use with Claude Code, considering intellectual property concerns.
 4. **Monitor Updates**: Given the "Research Preview" status, regularly review the CHANGELOG.md for updates that might affect functionality or security.
-5. **Consider Reverse Engineering Insights**: Review community reverse engineering efforts to better understand the tool's capabilities and limitations, though be aware of potential legal implications of using unauthorized derivatives.
-6. **Evaluate Alternatives**: Consider open-source alternatives like Continue or GitHub Copilot CLI that may offer similar functionality with more transparency.
+5. **Evaluate Alternatives**: Consider open-source alternatives like Continue or GitHub Copilot CLI that may offer similar functionality with more transparency.
